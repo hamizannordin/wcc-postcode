@@ -28,9 +28,9 @@ public class Postcode {
     private Integer id;
     @Column(length = 8, nullable = false)
     private String postcode;
-    @Column(length = 10, precision = 7)
+    @Column(columnDefinition = "decimal(10,7)")
     private double latitude;
-    @Column(length = 10, precision = 7)
+    @Column(columnDefinition = "decimal(10,7)")
     private double longitude;
 
     public Postcode() {
