@@ -13,7 +13,7 @@ import org.hibernate.annotations.Parameter;
  * @author hamizan
  */
 @Entity
-public class Postcode {
+public class PostcodeDetail {
 
     @Id
     @GeneratedValue(generator = "sequence-generator")
@@ -33,10 +33,10 @@ public class Postcode {
     @Column(columnDefinition = "decimal(10,7)")
     private double longitude;
 
-    public Postcode() {
+    public PostcodeDetail() {
     }
 
-    public Postcode(String postcode, double latitude, double longitude) {
+    public PostcodeDetail(String postcode, double latitude, double longitude) {
         this.postcode = postcode;
         this.latitude = latitude;
         this.longitude = longitude;

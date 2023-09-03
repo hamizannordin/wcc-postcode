@@ -2,7 +2,7 @@
 package wcc.postcode.service;
 
 import java.util.ArrayList;
-import wcc.postcode.entity.Postcode;
+import wcc.postcode.entity.PostcodeDetail;
 import wcc.postcode.exception.BadRequestException;
 import wcc.postcode.exception.NotFoundException;
 import java.util.List;
@@ -40,8 +40,8 @@ public class PostcodeService {
                 || queryPostcodeB == null || queryPostcodeB.isEmpty())
             throw new BadRequestException("Requires two postcode");
         
-        Postcode postcodeA = postcodeRepository.findByPostcode(queryPostcodeA);
-        Postcode postcodeB = postcodeRepository.findByPostcode(queryPostcodeB);
+        PostcodeDetail postcodeA = postcodeRepository.findByPostcode(queryPostcodeA);
+        PostcodeDetail postcodeB = postcodeRepository.findByPostcode(queryPostcodeB);
         
         if(postcodeA == null)
             throw new NotFoundException("Postcode not found: " + queryPostcodeA);
@@ -67,7 +67,7 @@ public class PostcodeService {
         return postcodeResponse;
     }
     
-    public Postcode updatePostcodeDetail (
+    public PostcodeDetail updatePostcodeDetail (
             String postcodeString, 
             UpdatePostcodeDetailRequest request) {
         
@@ -84,7 +84,7 @@ public class PostcodeService {
         if(longitude > longitudeBoundValue || longitude < -longitudeBoundValue)
             throw new BadRequestException("Invalid longitude value");
         
-        Postcode postcode = postcodeRepository.findByPostcode(postcodeString);
+        PostcodeDetail postcode = postcodeRepository.findByPostcode(postcodeString);
         
         if(postcode == null)
             throw new NotFoundException("Postcode not found");
@@ -100,14 +100,14 @@ public class PostcodeService {
     }
     
     private List<PostcodeDetail> createPostcodeDetailList (
-            Postcode postcodeA, Postcode postcodeB) {
+            PostcodeDetail postcodeA, PostcodeDetail postcodeB) {
         List<PostcodeDetail> postcodeDetailList = new ArrayList<>();
         postcodeDetailList.add(createPostcodeDetail(postcodeA));
         postcodeDetailList.add(createPostcodeDetail(postcodeB));
         return postcodeDetailList;
     }
     
-    private PostcodeDetail createPostcodeDetail (Postcode postcode) {
+    private PostcodeDetail createPostcodeDetail (PostcodeDetail postcode) {
         PostcodeDetail postcodeDetail = new PostcodeDetail();
         postcodeDetail.setPostcode(postcode.getPostcode());
         postcodeDetail.setLatitude(Double.toString(postcode.getLatitude()));

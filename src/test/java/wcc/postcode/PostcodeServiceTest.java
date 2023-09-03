@@ -1,6 +1,6 @@
 package wcc.postcode;
 
-import wcc.postcode.entity.Postcode;
+import wcc.postcode.entity.PostcodeDetail;
 import wcc.postcode.exception.BadRequestException;
 import wcc.postcode.exception.NotFoundException;
 import wcc.postcode.service.PostcodeService;
@@ -74,8 +74,8 @@ public class PostcodeServiceTest {
         double latitudeB = 0.22;
         double longitudeB = 1.33;
         String responseUnit = "km";
-        Postcode postcodeEntityA = new Postcode(postcodeA, latitudeA, longitudeA);
-        Postcode postcodeEntityB = new Postcode(postcodeB, latitudeB, longitudeB);
+        PostcodeDetail postcodeEntityA = new PostcodeDetail(postcodeA, latitudeA, longitudeA);
+        PostcodeDetail postcodeEntityB = new PostcodeDetail(postcodeB, latitudeB, longitudeB);
         
         when(postcodeRepository.findByPostcode(postcodeA))
                 .thenReturn(postcodeEntityA);
@@ -177,13 +177,13 @@ public class PostcodeServiceTest {
         request.setLatitude(latitude);
         request.setLongitude(longitude);
         
-        Postcode postcodeEntity = new Postcode(postcode, latitude, longitude);
+        PostcodeDetail postcodeEntity = new PostcodeDetail(postcode, latitude, longitude);
         
         when(postcodeRepository.findByPostcode(postcode)).thenReturn(postcodeEntity);
         
         when(postcodeRepository.save(postcodeEntity)).thenReturn(postcodeEntity);
         
-        Postcode postcodeResponse = postcodeService.updatePostcodeDetail(postcode, request);
+        PostcodeDetail postcodeResponse = postcodeService.updatePostcodeDetail(postcode, request);
         
         assertTrue(postcodeResponse.getLatitude() == latitude);
         assertTrue(postcodeResponse.getLongitude()== longitude);
