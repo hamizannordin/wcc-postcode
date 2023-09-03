@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import wcc.postcode.body.request.UpdatePostcodeDetailRequest;
 import wcc.postcode.body.response.DistanceBetweenPostcodeResponse;
 import wcc.postcode.body.response.PostcodeDetail;
 import wcc.postcode.repository.PostcodeRepository;
@@ -24,6 +25,8 @@ public class PostcodeService {
     
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final String unit = "km";
+    private final double latitudeBoundValue = 90;
+    private final double longitudeBoundValue = 180;
     
     @Autowired
     private PostcodeRepository postcodeRepository;
@@ -62,6 +65,38 @@ public class PostcodeService {
         postcodeResponse.setUnit(unit);
         
         return postcodeResponse;
+    }
+    
+    public Postcode updatePostcodeDetail (
+            String postcodeString, 
+            UpdatePostcodeDetailRequest request) {
+        
+        if(postcodeString.isBlank())
+            throw new BadRequestException("Postcode contains no value");
+        
+        double latitude = request.getLatitude();
+        
+        if(latitude > latitudeBoundValue || latitude < -latitudeBoundValue)
+            throw new BadRequestException("Invalid latitude value");
+        
+        double longitude = request.getLongitude();
+        
+        if(longitude > longitudeBoundValue || longitude < -longitudeBoundValue)
+            throw new BadRequestException("Invalid longitude value");
+        
+        Postcode postcode = postcodeRepository.findByPostcode(postcodeString);
+        
+        if(postcode == null)
+            throw new NotFoundException("Postcode not found");
+        
+        log.info("updating postcode {} coordinates...", postcodeString);
+        
+        postcode.setLatitude(latitude);
+        postcode.setLongitude(longitude);
+        
+        postcode = postcodeRepository.save(postcode);
+        
+        return postcode;
     }
     
     private List<PostcodeDetail> createPostcodeDetailList (
