@@ -10,7 +10,7 @@
     </parent>
     <groupId>wcc</groupId>
     <artifactId>wcc-postcode</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>wcc-postcode</name>
     <description>Postcode management</description>
     <properties>
