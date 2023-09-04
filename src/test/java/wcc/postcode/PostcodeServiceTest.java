@@ -92,11 +92,11 @@ public class PostcodeServiceTest {
         assertTrue(response.getDistance() >= 0);
         assertTrue(response.getPostcodeList().size() == 2);
         assertTrue(response.getPostcodeList().get(0).getPostcode().equals(postcodeA));
-        assertTrue(response.getPostcodeList().get(0).getLatitude().equals(Double.toString(latitudeA)));
-        assertTrue(response.getPostcodeList().get(0).getLongitude().equals(Double.toString(longitudeA)));
+        assertTrue(response.getPostcodeList().get(0).getLatitude() == latitudeA);
+        assertTrue(response.getPostcodeList().get(0).getLongitude() == longitudeA);
         assertTrue(response.getPostcodeList().get(1).getPostcode().equals(postcodeB));
-        assertTrue(response.getPostcodeList().get(1).getLatitude().equals(Double.toString(latitudeB)));
-        assertTrue(response.getPostcodeList().get(1).getLongitude().equals(Double.toString(longitudeB)));
+        assertTrue(response.getPostcodeList().get(1).getLatitude() == latitudeB);
+        assertTrue(response.getPostcodeList().get(1).getLongitude() == longitudeB);
         assertTrue(response.getUnit().equals(responseUnit));
     }
 
