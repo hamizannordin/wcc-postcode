@@ -10,9 +10,9 @@ name: Java Build
 
 on:
   push:
-    branches: [ "TASK00-java-test-challenge" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "TASK00-java-test-challenge" ]
+    branches: [ "master" ]
 
 jobs:
   build-jar:
