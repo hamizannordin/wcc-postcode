@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wcc.postcode.body.request.UpdatePostcodeDetailRequest;
 import wcc.postcode.body.response.DistanceBetweenPostcodeResponse;
-import wcc.postcode.body.response.PostcodeDetail;
 import wcc.postcode.repository.PostcodeRepository;
 import wcc.postcode.util.DistanceCalculatorUtil;
 
@@ -110,8 +109,8 @@ public class PostcodeService {
     private PostcodeDetail createPostcodeDetail (PostcodeDetail postcode) {
         PostcodeDetail postcodeDetail = new PostcodeDetail();
         postcodeDetail.setPostcode(postcode.getPostcode());
-        postcodeDetail.setLatitude(Double.toString(postcode.getLatitude()));
-        postcodeDetail.setLongitude(Double.toString(postcode.getLongitude()));
+        postcodeDetail.setLatitude(postcode.getLatitude());
+        postcodeDetail.setLongitude(postcode.getLongitude());
         return postcodeDetail;
     }
 }

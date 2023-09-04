@@ -2,6 +2,7 @@
 package wcc.postcode.body.response;
 
 import java.util.List;
+import wcc.postcode.entity.PostcodeDetail;
 
 /**
  *
