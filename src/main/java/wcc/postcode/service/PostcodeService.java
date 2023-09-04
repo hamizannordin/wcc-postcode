@@ -108,6 +108,7 @@ public class PostcodeService {
     
     private PostcodeDetail createPostcodeDetail (PostcodeDetail postcode) {
         PostcodeDetail postcodeDetail = new PostcodeDetail();
+        postcodeDetail.setId(postcode.getId());
         postcodeDetail.setPostcode(postcode.getPostcode());
         postcodeDetail.setLatitude(postcode.getLatitude());
         postcodeDetail.setLongitude(postcode.getLongitude());
