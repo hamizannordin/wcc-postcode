@@ -1,0 +1,25 @@
+jwt:
+    expiration: ${JWT_EXPIRATION:60}
+    issuer: ${JWT_ISSUER:jwtIssuer}
+    signkey: ${JWT_SIGNKEY:jwtSignKey}
+logging:
+    file:
+        max-history: 7
+        max-size: 100Kb
+        name: wcc-postcode.log
+        path: .
+    level:
+        org:
+            springframework:
+                web:
+                    filter:
+                        CommonsRequestLoggingFilter: DEBUG
+spring:
+    datasource:
+        driver-class-name: org.mariadb.jdbc.Driver
+        password: ${DB_PASSWORD}
+        url: ${DB_URL}
+        username: ${DB_USERNAME}
+    jpa:
+        hibernate:
+            ddl-auto: update
