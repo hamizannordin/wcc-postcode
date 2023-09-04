@@ -1,0 +1,14 @@
+services:
+    database:
+        container_name: mariadb-pod
+        image: mariadb:11.1.2
+        environment:
+          MARIADB_USER: ${DB_USERNAME}
+          MARIADB_PASSWORD: ${DB_PASSWORD}
+          MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+          MARIADB_DATABASE: wcc_db
+        ports:
+          - 3306:3306
+        volumes:
+          - "./sql/create_table.sql:/docker-entrypoint-initdb.d/create_table.sql"
+          - "./sql/insert_data.sql:/docker-entrypoint-initdb.d/insert_data.sql"
